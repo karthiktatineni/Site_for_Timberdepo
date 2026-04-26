@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import type { FormEvent } from 'react';
-import { motion, useScroll, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Bot, X, Send, Phone, ArrowRight, Package, Truck, Ruler, ShieldCheck, FileText, CheckCircle2, ShoppingBag, MapPin, Star } from 'lucide-react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { saveQuoteRequest, getProducts } from './firebase';
@@ -199,6 +199,7 @@ function QuoteSection() {
     phone: '',
     woodType: 'Teak Wood',
     quantity: '',
+    thickness: '',
     details: ''
   });
 
@@ -213,7 +214,7 @@ function QuoteSection() {
       }
       setFormSubmitted(true);
       setTimeout(() => setFormSubmitted(false), 5000);
-      setFormData({ name: '', phone: '', woodType: 'Teak Wood', quantity: '', details: '' });
+      setFormData({ name: '', phone: '', woodType: 'Teak Wood', quantity: '', thickness: '', details: '' });
     } catch (err) {
       console.error(err);
     }
@@ -289,7 +290,7 @@ function QuoteSection() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <div>
                 <label className="block text-[10px] uppercase tracking-widest text-beige-dim mb-2 drop-shadow-md">Wood Type</label>
                 <select value={formData.woodType} onChange={e => setFormData({ ...formData, woodType: e.target.value })} className="w-full bg-black/50 border border-gold/20 rounded p-3 text-sm focus:border-gold focus:outline-none transition-colors text-white">
@@ -301,7 +302,11 @@ function QuoteSection() {
               </div>
               <div>
                 <label className="block text-[10px] uppercase tracking-widest text-beige-dim mb-2 drop-shadow-md">Quantity</label>
-                <input type="text" value={formData.quantity} onChange={e => setFormData({ ...formData, quantity: e.target.value })} className="w-full bg-black/50 border border-gold/20 rounded p-3 text-sm focus:border-gold focus:outline-none transition-colors text-white" placeholder="e.g., 50 CFT" />
+                <input required type="text" value={formData.quantity} onChange={e => setFormData({ ...formData, quantity: e.target.value })} className="w-full bg-black/50 border border-gold/20 rounded p-3 text-sm focus:border-gold focus:outline-none transition-colors text-white" placeholder="e.g., 50 CFT" />
+              </div>
+              <div>
+                <label className="block text-[10px] uppercase tracking-widest text-beige-dim mb-2 drop-shadow-md">Thickness</label>
+                <input required type="text" value={formData.thickness} onChange={e => setFormData({ ...formData, thickness: e.target.value })} className="w-full bg-black/50 border border-gold/20 rounded p-3 text-sm focus:border-gold focus:outline-none transition-colors text-white" placeholder="e.g., 2 inch" />
               </div>
             </div>
 
@@ -357,19 +362,20 @@ const ShopPage = () => {
                 <img src={p.image || "https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?auto=format&fit=crop&q=80"} alt={p.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent opacity-80" />
               </div>
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-2">
-                  <div className="text-[10px] uppercase tracking-widest text-gold font-bold">{p.origin}</div>
-                  <div className="bg-gold/10 text-gold text-[10px] font-bold px-2 py-1 rounded">₹{p.price}/sqft</div>
-                </div>
+              <div className="p-6 flex flex-col h-full">
+                <div className="text-[10px] uppercase tracking-widest text-gold font-bold mb-1">{p.origin}</div>
                 <h3 className="font-heading text-xl text-white mb-2">{p.name}</h3>
-                <p className="text-xs text-beige-dim mb-4 line-clamp-2 leading-relaxed">{p.desc}</p>
-                <div className="flex items-center gap-2 text-[10px] text-white/50 uppercase tracking-widest mb-4 font-bold">
-                   <Package size={14} className="text-gold/50" /> Stock: {p.stock || 'Available'}
+                <p className="text-xs text-beige-dim mb-6 line-clamp-2 leading-relaxed flex-grow">{p.desc}</p>
+                
+                <div className="flex items-center justify-between border-t border-white/10 pt-4 mt-auto">
+                  <div className="flex flex-col">
+                    <span className="text-[8px] uppercase tracking-[0.2em] text-white/40 font-bold">Starting from</span>
+                    <span className="text-lg font-heading text-gold">₹{p.price}<span className="text-[10px] font-sans text-white/50 ml-1">/sqft</span></span>
+                  </div>
+                  <a href="#quote" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white hover:text-gold transition-colors">
+                    Inquire Now <ArrowRight size={14} />
+                  </a>
                 </div>
-                <a href="#quote" className="inline-flex items-center gap-2 text-white text-[10px] uppercase tracking-widest font-bold group-hover:text-gold transition-colors border-b border-transparent group-hover:border-gold pb-1">
-                  Inquire Now <ArrowRight size={14} />
-                </a>
               </div>
             </motion.div>
           ))}

@@ -154,9 +154,9 @@ export default function AdminPage() {
                   {q.status}
                 </span>
               </div>
-              <div className="bg-white/5 p-3 rounded text-sm text-beige-dim">
-                <span className="text-white font-bold block mb-1">{q.woodType} - {q.quantity}</span>
-                {q.details}
+              <div className="flex flex-col gap-1">
+                <div className="flex items-center gap-2 text-white/50 text-[11px]"><Package size={14} className="text-gold/50" /> <span className="font-bold text-white/80">{q.woodType}</span> | {q.quantity} | <span className="text-gold/80">{q.thickness || 'N/A'} thick</span></div>
+                <p className="text-xs text-beige-dim mt-2 bg-black/30 p-3 rounded border border-white/5 leading-relaxed">"{q.details}"</p>
               </div>
               <div className="mt-auto pt-4 flex gap-2">
                 {q.status !== 'completed' && (
