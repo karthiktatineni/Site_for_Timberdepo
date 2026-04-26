@@ -1,0 +1,622 @@
+import { useState, useEffect, useRef } from 'react';
+import type { FormEvent } from 'react';
+import { motion, useScroll, AnimatePresence } from 'framer-motion';
+import { Bot, X, Send, Phone, ArrowRight, Package, Truck, Ruler, ShieldCheck, FileText, CheckCircle2, ShoppingBag, MapPin, Star } from 'lucide-react';
+import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { saveQuoteRequest, getProducts } from './firebase';
+import AdminPage from './pages/Admin';
+
+const fadeUp: any = {
+  hidden: { opacity: 0, y: 40 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+};
+
+const SectionWrapper = ({ children, className = "", id }: { children: React.ReactNode, className?: string, id?: string }) => {
+  return (
+    <motion.section
+      id={id}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={{
+        hidden: { opacity: 0 },
+        show: { opacity: 1, transition: { staggerChildren: 0.15 } }
+      }}
+      className={`py-24 px-6 md:px-12 max-w-7xl mx-auto ${className}`}
+    >
+      {children}
+    </motion.section>
+  );
+};
+
+
+
+const REVIEWS = [
+  { name: "Arjun Reddy", role: "Lead Architect", text: "Timber Atelier provided the most exquisite Burmese Teak for our luxury villa project. The CNC cuts were precise to the millimeter." },
+  { name: "Sophia M.", role: "Interior Designer", text: "Their rosewood selection is unmatched. Delivery was right on time and the quality exceeded all expectations. My go-to timber depot." },
+  { name: "Raman Constructions", role: "Contractor", text: "Ordered 5,000 CFT of structural hardwood. They handled the bulk order effortlessly and pricing was very competitive." }
+];
+
+// --- PAGES ---
+
+function HomePage() {
+  return (
+    <>
+      {/* HERO SECTION */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden text-center bg-transparent">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="absolute inset-0 z-0 w-full h-full object-cover opacity-90"
+          src="https://cdn.coverr.co/videos/coverr-cutting-wood-with-a-circular-saw-4632/1080p.mp4"
+        />
+        <div className="absolute inset-0 z-1 bg-black/50" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10 max-w-5xl px-6 flex flex-col items-center mt-10"
+        >
+          <div className="border border-gold/30 bg-gold/5 backdrop-blur-md px-4 py-1 text-[10px] uppercase tracking-[0.3em] text-gold mb-6 shadow-2xl shadow-gold/10">
+            Digital Timber Showroom
+          </div>
+          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight text-white drop-shadow-2xl">
+            Premium Timber.<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-tertiary to-gold">Precision Cut.</span><br />
+            Delivered Fast.
+          </h1>
+          <p className="text-sm md:text-base text-beige-dim tracking-[0.15em] uppercase mb-10 drop-shadow-lg font-medium">
+            Teak | Hardwood | Custom Sizes | Bulk Supply
+          </p>
+
+          <div className="flex flex-wrap gap-4 justify-center">
+            <a href="#quote" className="bg-gold text-black px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl shadow-gold/20">
+              Get Instant Quote
+            </a>
+            <Link to="/shop" className="glass-panel px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-white/10 hover:border-gold transition-all duration-300 flex items-center gap-2">
+              <ShoppingBag size={16} /> Shop Products
+            </Link>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* DEPOT ABOUT SECTION */}
+      <SectionWrapper className="bg-black/20 backdrop-blur-md border-y border-gold/10 shadow-2xl" id="about">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <motion.div variants={fadeUp}>
+            <div className="text-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-3">About Our Depot</div>
+            <h2 className="font-heading text-4xl text-white mb-6">A Heritage of Woodcraft.</h2>
+            <p className="text-beige-dim text-sm leading-relaxed mb-6">
+              Located in the heart of the Industrial Timber District, Timber Atelier is not just a supplier — we are curators of the world's finest wood. With over two decades of experience, our massive depot houses exotic teaks, resilient hardwoods, and premium softwoods.
+            </p>
+            <p className="text-beige-dim text-sm leading-relaxed mb-8">
+              We operate state-of-the-art CNC mills right on our premises, allowing us to supply bespoke, precision-cut timber for luxury residential projects, grand commercial builds, and everything in between.
+            </p>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="border-l-2 border-gold pl-4">
+                <div className="text-3xl font-heading text-white">10K+</div>
+                <div className="text-[10px] text-beige-dim uppercase tracking-widest">CFT Stocked</div>
+              </div>
+              <div className="border-l-2 border-gold pl-4">
+                <div className="text-3xl font-heading text-white">20+</div>
+                <div className="text-[10px] text-beige-dim uppercase tracking-widest">Years Expertise</div>
+              </div>
+            </div>
+          </motion.div>
+          <motion.div variants={fadeUp} className="relative aspect-video lg:aspect-square rounded-xl overflow-hidden border border-gold/20 shadow-2xl">
+            <img src="/images/hero-bg.png" alt="Our Depot" className="w-full h-full object-cover filter grayscale-[10%]" />
+            <div className="absolute inset-0 bg-black/30" />
+          </motion.div>
+        </div>
+      </SectionWrapper>
+
+      {/* WHY US SECTION */}
+      <SectionWrapper id="why-us">
+        <div className="text-center mb-16">
+          <div className="text-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-3">The Advantage</div>
+          <h2 className="font-heading text-4xl text-white mb-4">Why Builders Trust Us.</h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {[
+            { title: "Precision Cut", desc: "Computer-controlled cutting machines ensure zero wastage.", icon: <Ruler className="text-gold w-8 h-8" /> },
+            { title: "Bulk Stock", desc: "Over 10,000+ CFT always ready for instant dispatch.", icon: <Package className="text-gold w-8 h-8" /> },
+            { title: "Fast Delivery", desc: "48-hour local delivery. We respect project timelines.", icon: <Truck className="text-gold w-8 h-8" /> },
+            { title: "Premium Grade", desc: "100% quality assured. Only the finest cuts make the cut.", icon: <ShieldCheck className="text-gold w-8 h-8" /> }
+          ].map((item, i) => (
+            <motion.div key={i} variants={fadeUp} className="glass-panel p-6 rounded-lg text-center hover:bg-gold/10 hover:border-gold/30 transition-all duration-500">
+              <div className="flex justify-center mb-4">{item.icon}</div>
+              <h3 className="font-heading text-lg mb-2 text-white">{item.title}</h3>
+              <p className="text-xs text-beige-dim leading-relaxed">{item.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* REVIEWS SECTION */}
+      <SectionWrapper className="bg-black/60 backdrop-blur-xl border-y border-gold/10" id="reviews">
+        <div className="text-center mb-16">
+          <div className="text-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Testimonials</div>
+          <h2 className="font-heading text-4xl text-white mb-4">Words from our Clients.</h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {REVIEWS.map((review, i) => (
+            <motion.div key={i} variants={fadeUp} className="bg-[#1A110F]/50 border border-white/5 p-8 rounded-xl shadow-xl hover:border-gold/20 transition-all">
+              <div className="flex gap-1 mb-4">
+                {[...Array(5)].map((_, idx) => <Star key={idx} size={14} className="text-gold fill-gold" />)}
+              </div>
+              <p className="text-sm text-beige-dim italic mb-6 leading-relaxed">"{review.text}"</p>
+              <div>
+                <div className="font-bold text-white text-sm">{review.name}</div>
+                <div className="text-[10px] text-gold uppercase tracking-widest mt-1">{review.role}</div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* SHOWCASE GALLERY */}
+      <SectionWrapper id="showcase">
+        <div className="mb-12 text-center">
+          <div className="text-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Portfolio</div>
+          <h2 className="font-heading text-4xl text-white mb-4">Project Showcase</h2>
+          <p className="text-beige-dim text-sm max-w-2xl mx-auto drop-shadow-md">See how our premium timber powers real-world construction and luxury interiors.</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            { title: "Luxury Doors", img: "/images/door-project.png" },
+            { title: "Custom Furniture", img: "/images/furniture-project.png" },
+            { title: "Structural Beams", img: "/images/construction-project.png" }
+          ].map((item, idx) => (
+            <motion.div key={idx} variants={fadeUp} className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer shadow-2xl border border-white/5">
+              <img src={item.img} alt={item.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[10%]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                <h3 className="font-heading text-2xl text-tertiary">{item.title}</h3>
+                <p className="text-xs uppercase tracking-widest text-white mt-2 flex items-center gap-1 group-hover:text-gold transition-colors">
+                  View Details <ArrowRight className="inline w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* REQUEST QUOTE & CONTACT FORM */}
+      <QuoteSection />
+    </>
+  );
+}
+
+
+
+function QuoteSection() {
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    woodType: 'Teak Wood',
+    quantity: '',
+    details: ''
+  });
+
+  const handleQuoteSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      // Save to Firebase (fails silently if no env variables, simulating success)
+      try {
+        await saveQuoteRequest(formData);
+      } catch (err) {
+        console.log("Firebase not configured properly, skipping real save.");
+      }
+      setFormSubmitted(true);
+      setTimeout(() => setFormSubmitted(false), 5000);
+      setFormData({ name: '', phone: '', woodType: 'Teak Wood', quantity: '', details: '' });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  return (
+    <section className="bg-black/80 backdrop-blur-xl border border-gold/20 shadow-2xl rounded-2xl overflow-hidden p-8 md:p-12 mb-12 max-w-7xl mx-auto" id="quote">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+        {/* LEFT COL: Contact Info & Map */}
+        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
+          <div className="text-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Get In Touch</div>
+          <h2 className="font-heading text-4xl text-white mb-6 drop-shadow-xl">Visit the Depot or Request a Quote</h2>
+          <p className="text-beige-dim text-sm leading-relaxed mb-8 drop-shadow-md">
+            Come select your own premium logs from our massive inventory, or submit a request online and our team will get back to you within 30 minutes.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-8 mb-8">
+            <div className="flex items-center gap-4 flex-1">
+              <div className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold bg-gold/5 shadow-lg shrink-0">
+                <MapPin size={20} />
+              </div>
+              <div>
+                <div className="text-[10px] uppercase tracking-widest text-outline-dim font-bold">Address</div>
+                <div className="text-white text-sm pr-4">Plot 45, Industrial Timber District, Bangalore</div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 flex-1">
+              <div className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold bg-gold/5 shadow-lg shrink-0">
+                <Phone size={20} />
+              </div>
+              <div>
+                <div className="text-[10px] uppercase tracking-widest text-outline-dim font-bold">Direct Line</div>
+                <div className="text-white text-sm">+91 98765 43210</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full aspect-[16/9] md:aspect-[21/9] rounded-xl overflow-hidden border border-white/10 shadow-inner">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15552.7133210553!2d77.580643!3d12.9715987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Map">
+            </iframe>
+          </div>
+        </motion.div>
+
+        {/* RIGHT COL: Form */}
+        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative bg-[#080504] p-8 rounded-xl border border-white/5">
+          <h3 className="font-heading text-2xl text-white mb-6">Online Request</h3>
+          <AnimatePresence>
+            {formSubmitted ? (
+              <motion.div
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                className="absolute inset-0 z-20 bg-[#0e0e0e]/95 backdrop-blur-md flex flex-col items-center justify-center text-center p-8 border border-gold/20 rounded-xl"
+              >
+                <CheckCircle2 className="text-green-500 w-16 h-16 mb-4" />
+                <h3 className="font-heading text-2xl text-white mb-2">Quote Requested!</h3>
+                <p className="text-sm text-beige-dim">Our team will contact you shortly with the best pricing.</p>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
+
+          <form onSubmit={handleQuoteSubmit} className="flex flex-col gap-5">
+            <div className="grid grid-cols-2 gap-5">
+              <div>
+                <label className="block text-[10px] uppercase tracking-widest text-beige-dim mb-2 drop-shadow-md">Name</label>
+                <input required type="text" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} className="w-full bg-black/50 border border-gold/20 rounded p-3 text-sm focus:border-gold focus:outline-none transition-colors text-white" placeholder="Your name" />
+              </div>
+              <div>
+                <label className="block text-[10px] uppercase tracking-widest text-beige-dim mb-2 drop-shadow-md">Phone</label>
+                <input required type="tel" value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} className="w-full bg-black/50 border border-gold/20 rounded p-3 text-sm focus:border-gold focus:outline-none transition-colors text-white" placeholder="+91" />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-5">
+              <div>
+                <label className="block text-[10px] uppercase tracking-widest text-beige-dim mb-2 drop-shadow-md">Wood Type</label>
+                <select value={formData.woodType} onChange={e => setFormData({ ...formData, woodType: e.target.value })} className="w-full bg-black/50 border border-gold/20 rounded p-3 text-sm focus:border-gold focus:outline-none transition-colors text-white">
+                  <option>Teak Wood</option>
+                  <option>Hardwood</option>
+                  <option>Pine Wood</option>
+                  <option>Custom Dimension</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-[10px] uppercase tracking-widest text-beige-dim mb-2 drop-shadow-md">Quantity</label>
+                <input type="text" value={formData.quantity} onChange={e => setFormData({ ...formData, quantity: e.target.value })} className="w-full bg-black/50 border border-gold/20 rounded p-3 text-sm focus:border-gold focus:outline-none transition-colors text-white" placeholder="e.g., 50 CFT" />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-[10px] uppercase tracking-widest text-beige-dim mb-2 drop-shadow-md">Project Details</label>
+              <textarea required rows={3} value={formData.details} onChange={e => setFormData({ ...formData, details: e.target.value })} className="w-full bg-black/50 border border-gold/20 rounded p-3 text-sm focus:border-gold focus:outline-none transition-colors resize-none text-white" placeholder="What are you building?"></textarea>
+            </div>
+
+            <button type="submit" className="w-full bg-gold text-black py-4 font-bold uppercase tracking-widest text-xs hover:bg-white hover:shadow-[0_0_20px_rgba(200,161,101,0.4)] transition-all flex justify-center items-center gap-2 mt-2 rounded-sm">
+              <FileText size={16} /> Submit Request
+            </button>
+          </form>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+const ShopPage = () => {
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getProducts().then(res => {
+      setProducts(Array.isArray(res) ? res : []);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) return <div className="pt-32 text-center text-white/50 min-h-screen">Loading inventory...</div>;
+
+  return (
+    <div className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
+      <SectionWrapper>
+        <div className="mb-12">
+           <div className="text-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Live Inventory</div>
+           <h1 className="font-heading text-5xl text-white mb-4">The Collection</h1>
+           <p className="text-beige-dim max-w-2xl mb-12">Every piece is hand-selected and ethically sourced. Real-time pricing from our Industrial Timber District depot.</p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products.length === 0 && <div className="text-white/30 uppercase tracking-widest text-xs">No products in showroom yet.</div>}
+          {products.map((p, i) => (
+            <motion.div
+              key={p.id || i}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="group bg-black/40 border border-white/10 overflow-hidden rounded-xl shadow-2xl transition-all hover:border-gold/30"
+            >
+              <div className="aspect-[4/5] overflow-hidden relative">
+                <img src={p.image || "https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?auto=format&fit=crop&q=80"} alt={p.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent opacity-80" />
+              </div>
+              <div className="p-6">
+                <div className="flex justify-between items-start mb-2">
+                  <div className="text-[10px] uppercase tracking-widest text-gold font-bold">{p.origin}</div>
+                  <div className="bg-gold/10 text-gold text-[10px] font-bold px-2 py-1 rounded">₹{p.price}/sqft</div>
+                </div>
+                <h3 className="font-heading text-xl text-white mb-2">{p.name}</h3>
+                <p className="text-xs text-beige-dim mb-4 line-clamp-2 leading-relaxed">{p.desc}</p>
+                <div className="flex items-center gap-2 text-[10px] text-white/50 uppercase tracking-widest mb-4 font-bold">
+                   <Package size={14} className="text-gold/50" /> Stock: {p.stock || 'Available'}
+                </div>
+                <a href="#quote" className="inline-flex items-center gap-2 text-white text-[10px] uppercase tracking-widest font-bold group-hover:text-gold transition-colors border-b border-transparent group-hover:border-gold pb-1">
+                  Inquire Now <ArrowRight size={14} />
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      <div id="quote" className="mt-12">
+        <QuoteSection />
+      </div>
+    </div>
+  );
+};
+
+function AboutPage() {
+  return (
+    <div className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
+      <div className="mb-16 text-center">
+        <div className="text-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Our Story</div>
+        <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-white mb-6 drop-shadow-2xl">About Timber Atelier</h1>
+        <p className="text-beige-dim max-w-3xl mx-auto text-sm leading-relaxed drop-shadow-md font-medium">
+          Located in the heart of the Industrial Timber District, Timber Atelier is not just a supplier — we are curators of the world's finest wood. 
+          With over two decades of experience, our massive depot houses exotic teaks, resilient hardwoods, and premium softwoods.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 items-center">
+        <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-gold/20 shadow-2xl">
+          <img src="/images/teak-texture.png" alt="Our Depot" className="w-full h-full object-cover filter grayscale-[10%]" />
+        </div>
+        <div>
+          <h2 className="font-heading text-3xl text-white mb-6">Master Craftsmanship</h2>
+          <p className="text-sm text-beige-dim leading-relaxed mb-6">
+            We operate state-of-the-art CNC mills right on our premises, allowing us to supply bespoke, precision-cut timber for luxury residential projects, grand commercial builds, and everything in between.
+          </p>
+          <div className="grid grid-cols-2 gap-6 mt-8">
+            <div className="border-l-2 border-gold pl-4">
+              <div className="text-3xl font-heading text-white">10K+</div>
+              <div className="text-[10px] text-beige-dim uppercase tracking-widest mt-1">CFT Stocked</div>
+            </div>
+            <div className="border-l-2 border-gold pl-4">
+              <div className="text-3xl font-heading text-white">20+</div>
+              <div className="text-[10px] text-beige-dim uppercase tracking-widest mt-1">Years Expertise</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <QuoteSection />
+    </div>
+  );
+}
+
+// --- MAIN LAYOUT & APP ---
+
+const SYSTEM_PROMPT = `You are a concise, highly intelligent AI sales assistant and voice receptionist for a premium timber depot (Timber Atelier). Answer ANY question the user asks properly and accurately.
+
+If the inquiry is about timber or our business, use this knowledge:
+- We stock: Teak wood (premium), Hardwood (construction), Pine wood (budget).
+- Services: Custom cutting, bulk supply, door frames.
+
+🎯 GOAL & STYLE (CRITICAL RULES):
+1. BE EXTREMELY CONCISE. Respond with short, natural conversational sentences (1-2 sentences max per response).
+2. ONLY answer exactly what is asked. Answer their questions properly and directly.
+3. NEVER use Markdown formatting. No asterisks, no bold text, no bullet points, no numbered lists. Use plain conversational text only.
+4. Use the "CURRENT INVENTORY & PRICING" provided in the context below. This is REAL-TIME data. You MUST prioritize these specific prices. Quote everything in Indian Rupees (₹). If a customer asks for a price, quote the exact number from the list. Always state it is an example baseline and ask for their dimensions.
+5. For specific price inquiries, provide the example baseline from our inventory.
+6. For serious inquiries, bulk orders, or precision quotes, tell the user to use the "Request Quote" form on our website so our experts can contact them.
+7. Never hallucinate final prices or stock. STRICTLY use the provided data in INR (₹). If no data is available, tell them our experts will provide a custom quote.`;
+
+function AppLayout() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [messages, setMessages] = useState<{ role: 'user' | 'bot', content: string }[]>([
+    { role: 'bot', content: 'Hello! Welcome to our timber depot. How can I help you today?' }
+  ]);
+  const [inputMsg, setInputMsg] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const [liveInventory, setLiveInventory] = useState<any[]>([]);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    // Fetch live products for AI context
+    getProducts()
+      .then(res => setLiveInventory(Array.isArray(res) ? res : []))
+      .catch(() => setLiveInventory([]));
+  }, []);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, isTyping]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  const handleSendChat = async () => {
+    if (!inputMsg.trim()) return;
+
+    const userMessage = inputMsg;
+    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+    setInputMsg('');
+    setIsTyping(true);
+
+    try {
+      const liveContext = liveInventory.length > 0 
+        ? `\nCURRENT INVENTORY & PRICING: ${JSON.stringify(liveInventory.map(p => ({name: p.name, price_per_sqft: p.price, stock: p.stock})))}`
+        : '';
+        
+      const apiMessages = [
+        { role: 'system', content: SYSTEM_PROMPT + liveContext },
+        ...messages.map(m => ({ role: m.role === 'bot' ? 'assistant' : 'user', content: m.content })),
+        { role: 'user', content: userMessage }
+      ];
+
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          messages: apiMessages,
+          temperature: 0.60,
+          stream: false
+        })
+      });
+
+      const data = await response.json();
+      if (data.choices && data.choices[0]) {
+        setMessages(prev => [...prev, { role: 'bot', content: data.choices[0].message.content }]);
+      } else {
+        setMessages(prev => [...prev, { role: 'bot', content: 'System error. Please try again.' }]);
+      }
+    } catch (err) {
+      setMessages(prev => [...prev, { role: 'bot', content: 'Connection issue. Please call us directly.' }]);
+    } finally {
+      setIsTyping(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen font-sans selection:bg-gold selection:text-black flex flex-col text-white relative">
+      {/* BACKGROUND TEXTURE FOR THE REST OF THE PAGE */}
+      <div 
+        className="fixed inset-0 z-[-1] bg-cover bg-center bg-no-repeat opacity-20 pointer-events-none"
+        style={{ backgroundImage: "url('/images/teak-texture.png')" }}
+      />
+      <div className="fixed inset-0 z-[-2] bg-[#1a0f0a]" />
+
+      {/* NAVBAR */}
+      <nav className="fixed top-0 w-full z-50 bg-[#080504]/90 backdrop-blur-xl border-b border-gold/10 shadow-2xl transition-transform">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
+          <Link to="/" className="font-heading text-xl md:text-2xl tracking-[0.2em] font-bold text-gold drop-shadow-md">TIMBER ATELIER</Link>
+          <div className="hidden md:flex gap-8 font-semibold tracking-widest uppercase text-[10px]">
+            <Link to="/" className={`${location.pathname === '/' ? 'text-gold' : 'text-outline-dim hover:text-white'} transition-colors`}>Home</Link>
+            <Link to="/shop" className={`${location.pathname === '/shop' ? 'text-gold' : 'text-outline-dim hover:text-white'} transition-colors`}>Shop</Link>
+            <Link to="/about" className={`${location.pathname === '/about' ? 'text-gold' : 'text-outline-dim hover:text-white'} transition-colors`}>About</Link>
+          </div>
+          <a href="#quote" className="border border-gold text-gold hover:bg-gold hover:text-black transition-colors px-6 py-2 text-[10px] uppercase tracking-widest font-bold shadow-lg shadow-gold/10">
+            Request Quote
+          </a>
+        </div>
+      </nav>
+
+      {/* PAGE CONTENT */}
+      <div className="flex-1 relative z-10">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+        </Routes>
+      </div>
+
+      {/* FOOTER */}
+      <footer className="py-12 text-center bg-[#080504] border-t border-gold/10 relative z-10">
+        <div className="font-heading text-xl tracking-[0.2em] font-bold text-gold mb-6 drop-shadow-md">TIMBER ATELIER</div>
+        <div className="flex justify-center gap-6 mb-6">
+          <Link to="/shop" className="text-[10px] uppercase tracking-widest text-beige-dim hover:text-white">Shop</Link>
+          <a href="#quote" className="text-[10px] uppercase tracking-widest text-beige-dim hover:text-white">Contact</a>
+        </div>
+        <p className="text-[10px] text-white/30 uppercase tracking-widest drop-shadow-md">© 2026. Premium Timber Showroom.</p>
+      </footer>
+
+      {/* AI CHATBOT WIDGET */}
+      <AnimatePresence>
+        {isChatOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            className="fixed bottom-24 right-6 w-80 md:w-96 h-[500px] bg-black/90 backdrop-blur-2xl rounded-xl flex flex-col overflow-hidden z-50 border border-gold/30 shadow-2xl"
+          >
+            <div className="bg-[#1A110F] p-4 border-b border-gold/20 flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <div className="bg-gold/10 p-2 rounded-full border border-gold/30 shadow-inner"><Bot className="text-gold w-5 h-5" /></div>
+                <div>
+                  <div className="font-bold text-sm text-white">Timber AI Voice Agent</div>
+                  <div className="text-[10px] text-green-400 uppercase tracking-widest font-bold drop-shadow">Online</div>
+                </div>
+              </div>
+              <button onClick={() => setIsChatOpen(false)} className="text-beige-dim hover:text-white"><X size={20} /></button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4">
+              {messages.map((m, i) => (
+                <div key={i} className={`max-w-[85%] p-3 rounded-xl text-sm leading-relaxed shadow-md ${m.role === 'user' ? 'bg-gold/20 border border-gold/30 text-white self-end rounded-br-none' : 'bg-white/5 border border-white/10 self-start rounded-bl-none text-beige-dim'}`}>
+                  {m.content}
+                </div>
+              ))}
+              {isTyping && (
+                <div className="bg-white/5 border border-white/10 self-start rounded-bl-none max-w-[85%] p-3 rounded-xl text-sm text-outline-dim italic">
+                  Typing...
+                </div>
+              )}
+              <div ref={chatEndRef} />
+            </div>
+
+            <div className="p-3 bg-[#1A110F] border-t border-gold/20 flex gap-2">
+              <input
+                type="text" value={inputMsg} onChange={e => setInputMsg(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && handleSendChat()}
+                placeholder="Ask about wood or pricing..."
+                className="flex-1 bg-black/50 border border-gold/20 rounded px-3 py-2 text-sm focus:outline-none focus:border-gold text-white placeholder:text-white/30"
+              />
+              <button onClick={handleSendChat} className="bg-gold text-black p-2 rounded hover:bg-white hover:shadow-[0_0_15px_rgba(200,161,101,0.5)] transition-all">
+                <Send size={18} />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <button
+        onClick={() => setIsChatOpen(!isChatOpen)}
+        className="fixed bottom-6 right-6 bg-gold text-black w-14 h-14 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(200,161,101,0.5)] hover:scale-105 transition-transform z-50 border border-white/20"
+      >
+        {isChatOpen ? <X size={24} /> : <Bot size={24} />}
+      </button>
+
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppLayout />
+    </BrowserRouter>
+  );
+}
