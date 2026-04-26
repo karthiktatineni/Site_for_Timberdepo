@@ -5,6 +5,11 @@ import { Groq } from 'groq-sdk'
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    watch: {
+      ignored: ['**/*.crdownload']
+    }
+  },
   plugins: [
     react(),
     tailwindcss(),

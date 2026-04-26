@@ -49,10 +49,10 @@ function HomePage() {
           loop 
           muted 
           playsInline
-          className="absolute inset-0 z-0 w-full h-full object-cover opacity-90"
-          src="https://cdn.coverr.co/videos/coverr-cutting-wood-with-a-circular-saw-4632/1080p.mp4"
+          className="absolute inset-0 z-0 w-full h-full object-cover opacity-80"
+          src="/images/Timber_journey_from_202604262201 (3).mp4"
         />
-        <div className="absolute inset-0 z-1 bg-black/50" />
+        <div className="absolute inset-0 z-1 bg-surface/40" />
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -60,23 +60,23 @@ function HomePage() {
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="relative z-10 max-w-5xl px-6 flex flex-col items-center mt-10"
         >
-          <div className="border border-gold/30 bg-gold/5 backdrop-blur-md px-4 py-1 text-[10px] uppercase tracking-[0.3em] text-gold mb-6 shadow-2xl shadow-gold/10">
+          <div className="border border-gold/40 bg-white/30 backdrop-blur-md px-4 py-1 text-[10px] uppercase tracking-[0.3em] text-brown font-bold mb-6 shadow-xl">
             Digital Timber Showroom
           </div>
-          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight text-white drop-shadow-2xl">
+          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight text-brown drop-shadow-sm">
             Premium Timber.<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-tertiary to-gold">Precision Cut.</span><br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-forest to-brown">Precision Cut.</span><br />
             Delivered Fast.
           </h1>
-          <p className="text-sm md:text-base text-beige-dim tracking-[0.15em] uppercase mb-10 drop-shadow-lg font-medium">
+          <p className="text-sm md:text-base text-forest tracking-[0.15em] uppercase mb-10 drop-shadow-sm font-bold">
             Teak | Hardwood | Custom Sizes | Bulk Supply
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center">
-            <a href="#quote" className="bg-gold text-black px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl shadow-gold/20">
+            <a href="#quote" className="bg-forest text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-brown hover:scale-105 transition-all duration-300 shadow-xl shadow-forest/20">
               Get Instant Quote
             </a>
-            <Link to="/shop" className="glass-panel px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-white/10 hover:border-gold transition-all duration-300 flex items-center gap-2">
+            <Link to="/shop" className="glass-panel px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-forest/5 hover:border-forest transition-all duration-300 flex items-center gap-2 text-forest">
               <ShoppingBag size={16} /> Shop Products
             </Link>
           </div>
@@ -84,74 +84,76 @@ function HomePage() {
       </section>
 
       {/* DEPOT ABOUT SECTION */}
-      <SectionWrapper className="bg-black/20 backdrop-blur-md border-y border-gold/10 shadow-2xl" id="about">
+      <SectionWrapper className="bg-white/40 backdrop-blur-md border-y border-gold/20 shadow-xl" id="about">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div variants={fadeUp}>
-            <div className="text-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-3">About Our Depot</div>
-            <h2 className="font-heading text-4xl text-white mb-6">A Heritage of Woodcraft.</h2>
-            <p className="text-beige-dim text-sm leading-relaxed mb-6">
+            <div className="text-forest text-[10px] uppercase tracking-[0.3em] font-bold mb-3">About Our Depot</div>
+            <h2 className="font-heading text-4xl text-brown mb-6">A Heritage of Woodcraft.</h2>
+            <p className="text-text-muted text-sm leading-relaxed mb-6">
               Located in the heart of the Industrial Timber District, Timber Atelier is not just a supplier — we are curators of the world's finest wood. With over two decades of experience, our massive depot houses exotic teaks, resilient hardwoods, and premium softwoods.
             </p>
-            <p className="text-beige-dim text-sm leading-relaxed mb-8">
+            <p className="text-text-muted text-sm leading-relaxed mb-8">
               We operate state-of-the-art CNC mills right on our premises, allowing us to supply bespoke, precision-cut timber for luxury residential projects, grand commercial builds, and everything in between.
             </p>
             <div className="grid grid-cols-2 gap-6">
               <div className="border-l-2 border-gold pl-4">
-                <div className="text-3xl font-heading text-white">10K+</div>
-                <div className="text-[10px] text-beige-dim uppercase tracking-widest">CFT Stocked</div>
+                <div className="text-3xl font-heading text-brown">10K+</div>
+                <div className="text-[10px] text-text-muted uppercase tracking-widest font-bold">CFT Stocked</div>
               </div>
               <div className="border-l-2 border-gold pl-4">
-                <div className="text-3xl font-heading text-white">20+</div>
-                <div className="text-[10px] text-beige-dim uppercase tracking-widest">Years Expertise</div>
+                <div className="text-3xl font-heading text-brown">20+</div>
+                <div className="text-[10px] text-text-muted uppercase tracking-widest font-bold">Years Expertise</div>
               </div>
             </div>
           </motion.div>
-          <motion.div variants={fadeUp} className="relative aspect-video lg:aspect-square rounded-xl overflow-hidden border border-gold/20 shadow-2xl">
-            <img src="/images/hero-bg.png" alt="Our Depot" className="w-full h-full object-cover filter grayscale-[10%]" />
-            <div className="absolute inset-0 bg-black/30" />
+          <motion.div variants={fadeUp} className="relative aspect-video lg:aspect-square rounded-xl overflow-hidden border border-gold/30 shadow-2xl">
+            <img src="/images/hero-bg.png" alt="Our Depot" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-forest/5" />
           </motion.div>
         </div>
       </SectionWrapper>
 
+
       {/* WHY US SECTION */}
       <SectionWrapper id="why-us">
         <div className="text-center mb-16">
-          <div className="text-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-3">The Advantage</div>
-          <h2 className="font-heading text-4xl text-white mb-4">Why Builders Trust Us.</h2>
+          <div className="text-forest text-[10px] uppercase tracking-[0.3em] font-bold mb-3">The Advantage</div>
+          <h2 className="font-heading text-4xl text-brown mb-4">Why Builders Trust Us.</h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {[
-            { title: "Precision Cut", desc: "Computer-controlled cutting machines ensure zero wastage.", icon: <Ruler className="text-gold w-8 h-8" /> },
-            { title: "Bulk Stock", desc: "Over 10,000+ CFT always ready for instant dispatch.", icon: <Package className="text-gold w-8 h-8" /> },
-            { title: "Fast Delivery", desc: "48-hour local delivery. We respect project timelines.", icon: <Truck className="text-gold w-8 h-8" /> },
-            { title: "Premium Grade", desc: "100% quality assured. Only the finest cuts make the cut.", icon: <ShieldCheck className="text-gold w-8 h-8" /> }
+            { title: "Precision Cut", desc: "Computer-controlled cutting machines ensure zero wastage.", icon: <Ruler className="text-forest w-8 h-8" /> },
+            { title: "Bulk Stock", desc: "Over 10,000+ CFT always ready for instant dispatch.", icon: <Package className="text-forest w-8 h-8" /> },
+            { title: "Fast Delivery", desc: "48-hour local delivery. We respect project timelines.", icon: <Truck className="text-forest w-8 h-8" /> },
+            { title: "Premium Grade", desc: "100% quality assured. Only the finest cuts make the cut.", icon: <ShieldCheck className="text-forest w-8 h-8" /> }
           ].map((item, i) => (
-            <motion.div key={i} variants={fadeUp} className="glass-panel p-6 rounded-lg text-center hover:bg-gold/10 hover:border-gold/30 transition-all duration-500">
-              <div className="flex justify-center mb-4">{item.icon}</div>
-              <h3 className="font-heading text-lg mb-2 text-white">{item.title}</h3>
-              <p className="text-xs text-beige-dim leading-relaxed">{item.desc}</p>
+            <motion.div key={i} variants={fadeUp} className="glass-panel p-6 rounded-lg text-center hover:bg-forest/5 hover:border-gold/50 transition-all duration-500 group">
+              <div className="flex justify-center mb-4 transition-transform group-hover:scale-110">{item.icon}</div>
+              <h3 className="font-heading text-lg mb-2 text-brown">{item.title}</h3>
+              <p className="text-xs text-text-muted leading-relaxed">{item.desc}</p>
             </motion.div>
           ))}
         </div>
       </SectionWrapper>
 
+
       {/* REVIEWS SECTION */}
-      <SectionWrapper className="bg-black/60 backdrop-blur-xl border-y border-gold/10" id="reviews">
+      <SectionWrapper className="bg-surface-container/60 backdrop-blur-xl border-y border-gold/20" id="reviews">
         <div className="text-center mb-16">
-          <div className="text-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Testimonials</div>
-          <h2 className="font-heading text-4xl text-white mb-4">Words from our Clients.</h2>
+          <div className="text-forest text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Testimonials</div>
+          <h2 className="font-heading text-4xl text-brown mb-4">Words from our Clients.</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {REVIEWS.map((review, i) => (
-            <motion.div key={i} variants={fadeUp} className="bg-[#1A110F]/50 border border-white/5 p-8 rounded-xl shadow-xl hover:border-gold/20 transition-all">
+            <motion.div key={i} variants={fadeUp} className="bg-white/60 border border-gold/10 p-8 rounded-xl shadow-lg hover:border-gold/40 transition-all">
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, idx) => <Star key={idx} size={14} className="text-gold fill-gold" />)}
               </div>
-              <p className="text-sm text-beige-dim italic mb-6 leading-relaxed">"{review.text}"</p>
+              <p className="text-sm text-text-muted italic mb-6 leading-relaxed">"{review.text}"</p>
               <div>
-                <div className="font-bold text-white text-sm">{review.name}</div>
-                <div className="text-[10px] text-gold uppercase tracking-widest mt-1">{review.role}</div>
+                <div className="font-bold text-brown text-sm">{review.name}</div>
+                <div className="text-[10px] text-forest uppercase tracking-widest mt-1 font-bold">{review.role}</div>
               </div>
             </motion.div>
           ))}
@@ -161,9 +163,9 @@ function HomePage() {
       {/* SHOWCASE GALLERY */}
       <SectionWrapper id="showcase">
         <div className="mb-12 text-center">
-          <div className="text-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Portfolio</div>
-          <h2 className="font-heading text-4xl text-white mb-4">Project Showcase</h2>
-          <p className="text-beige-dim text-sm max-w-2xl mx-auto drop-shadow-md">See how our premium timber powers real-world construction and luxury interiors.</p>
+          <div className="text-forest text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Portfolio</div>
+          <h2 className="font-heading text-4xl text-brown mb-4">Project Showcase</h2>
+          <p className="text-text-muted text-sm max-w-2xl mx-auto">See how our premium timber powers real-world construction and luxury interiors.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
@@ -171,11 +173,11 @@ function HomePage() {
             { title: "Custom Furniture", img: "/images/furniture-project.png" },
             { title: "Structural Beams", img: "/images/construction-project.png" }
           ].map((item, idx) => (
-            <motion.div key={idx} variants={fadeUp} className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer shadow-2xl border border-white/5">
-              <img src={item.img} alt={item.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[10%]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-                <h3 className="font-heading text-2xl text-tertiary">{item.title}</h3>
-                <p className="text-xs uppercase tracking-widest text-white mt-2 flex items-center gap-1 group-hover:text-gold transition-colors">
+            <motion.div key={idx} variants={fadeUp} className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer shadow-xl border border-gold/10">
+              <img src={item.img} alt={item.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-t from-brown/90 via-brown/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                <h3 className="font-heading text-2xl text-surface">{item.title}</h3>
+                <p className="text-xs uppercase tracking-widest text-surface mt-2 flex items-center gap-1 group-hover:text-gold transition-colors font-bold">
                   View Details <ArrowRight className="inline w-3 h-3 group-hover:translate-x-1 transition-transform" />
                 </p>
               </div>
@@ -183,6 +185,7 @@ function HomePage() {
           ))}
         </div>
       </SectionWrapper>
+
 
       {/* REQUEST QUOTE & CONTACT FORM */}
       <QuoteSection />
@@ -221,40 +224,40 @@ function QuoteSection() {
   };
 
   return (
-    <section className="bg-black/80 backdrop-blur-xl border border-gold/20 shadow-2xl rounded-2xl overflow-hidden p-8 md:p-12 mb-12 max-w-7xl mx-auto" id="quote">
+    <section className="bg-white/80 backdrop-blur-xl border border-gold/30 shadow-xl rounded-2xl overflow-hidden p-8 md:p-12 mb-12 max-w-7xl mx-auto" id="quote">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
         {/* LEFT COL: Contact Info & Map */}
         <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
-          <div className="text-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Get In Touch</div>
-          <h2 className="font-heading text-4xl text-white mb-6 drop-shadow-xl">Visit the Depot or Request a Quote</h2>
-          <p className="text-beige-dim text-sm leading-relaxed mb-8 drop-shadow-md">
+          <div className="text-forest text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Get In Touch</div>
+          <h2 className="font-heading text-4xl text-brown mb-6">Visit the Depot or Request a Quote</h2>
+          <p className="text-text-muted text-sm leading-relaxed mb-8">
             Come select your own premium logs from our massive inventory, or submit a request online and our team will get back to you within 30 minutes.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-8 mb-8">
             <div className="flex items-center gap-4 flex-1">
-              <div className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold bg-gold/5 shadow-lg shrink-0">
+              <div className="w-12 h-12 rounded-full border border-forest/30 flex items-center justify-center text-forest bg-forest/5 shadow-md shrink-0">
                 <MapPin size={20} />
               </div>
               <div>
-                <div className="text-[10px] uppercase tracking-widest text-outline-dim font-bold">Address</div>
-                <div className="text-white text-sm pr-4">Plot 45, Industrial Timber District, Bangalore</div>
+                <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold">Address</div>
+                <div className="text-brown text-sm pr-4 font-semibold">Plot 45, Industrial Timber District, Bangalore</div>
               </div>
             </div>
 
             <div className="flex items-center gap-4 flex-1">
-              <div className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold bg-gold/5 shadow-lg shrink-0">
+              <div className="w-12 h-12 rounded-full border border-forest/30 flex items-center justify-center text-forest bg-forest/5 shadow-md shrink-0">
                 <Phone size={20} />
               </div>
               <div>
-                <div className="text-[10px] uppercase tracking-widest text-outline-dim font-bold">Direct Line</div>
-                <div className="text-white text-sm">+91 98765 43210</div>
+                <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold">Direct Line</div>
+                <div className="text-brown text-sm font-semibold">+91 98765 43210</div>
               </div>
             </div>
           </div>
 
-          <div className="w-full aspect-[16/9] md:aspect-[21/9] rounded-xl overflow-hidden border border-white/10 shadow-inner">
+          <div className="w-full aspect-[16/9] md:aspect-[21/9] rounded-xl overflow-hidden border border-gold/20 shadow-inner">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15552.7133210553!2d77.580643!3d12.9715987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
               width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Map">
@@ -262,18 +265,19 @@ function QuoteSection() {
           </div>
         </motion.div>
 
+
         {/* RIGHT COL: Form */}
-        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative bg-[#080504] p-8 rounded-xl border border-white/5">
-          <h3 className="font-heading text-2xl text-white mb-6">Online Request</h3>
+        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative bg-white p-8 rounded-xl border border-gold/20 shadow-lg">
+          <h3 className="font-heading text-2xl text-brown mb-6">Online Request</h3>
           <AnimatePresence>
             {formSubmitted ? (
               <motion.div
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                className="absolute inset-0 z-20 bg-[#0e0e0e]/95 backdrop-blur-md flex flex-col items-center justify-center text-center p-8 border border-gold/20 rounded-xl"
+                className="absolute inset-0 z-20 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center text-center p-8 border border-forest/20 rounded-xl"
               >
-                <CheckCircle2 className="text-green-500 w-16 h-16 mb-4" />
-                <h3 className="font-heading text-2xl text-white mb-2">Quote Requested!</h3>
-                <p className="text-sm text-beige-dim">Our team will contact you shortly with the best pricing.</p>
+                <CheckCircle2 className="text-forest w-16 h-16 mb-4" />
+                <h3 className="font-heading text-2xl text-brown mb-2">Quote Requested!</h3>
+                <p className="text-sm text-text-muted">Our team will contact you shortly with the best pricing.</p>
               </motion.div>
             ) : null}
           </AnimatePresence>
@@ -281,19 +285,19 @@ function QuoteSection() {
           <form onSubmit={handleQuoteSubmit} className="flex flex-col gap-5">
             <div className="grid grid-cols-2 gap-5">
               <div>
-                <label className="block text-[10px] uppercase tracking-widest text-beige-dim mb-2 drop-shadow-md">Name</label>
-                <input required type="text" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} className="w-full bg-black/50 border border-gold/20 rounded p-3 text-sm focus:border-gold focus:outline-none transition-colors text-white" placeholder="Your name" />
+                <label className="block text-[10px] uppercase tracking-widest text-text-muted mb-2 font-bold">Name</label>
+                <input required type="text" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} className="w-full bg-surface-container border border-gold/30 rounded p-3 text-sm focus:border-forest focus:outline-none transition-colors text-brown font-semibold" placeholder="Your name" />
               </div>
               <div>
-                <label className="block text-[10px] uppercase tracking-widest text-beige-dim mb-2 drop-shadow-md">Phone</label>
-                <input required type="tel" value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} className="w-full bg-black/50 border border-gold/20 rounded p-3 text-sm focus:border-gold focus:outline-none transition-colors text-white" placeholder="+91" />
+                <label className="block text-[10px] uppercase tracking-widest text-text-muted mb-2 font-bold">Phone</label>
+                <input required type="tel" value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} className="w-full bg-surface-container border border-gold/30 rounded p-3 text-sm focus:border-forest focus:outline-none transition-colors text-brown font-semibold" placeholder="+91" />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <div>
-                <label className="block text-[10px] uppercase tracking-widest text-beige-dim mb-2 drop-shadow-md">Wood Type</label>
-                <select value={formData.woodType} onChange={e => setFormData({ ...formData, woodType: e.target.value })} className="w-full bg-black/50 border border-gold/20 rounded p-3 text-sm focus:border-gold focus:outline-none transition-colors text-white">
+                <label className="block text-[10px] uppercase tracking-widest text-text-muted mb-2 font-bold">Wood Type</label>
+                <select value={formData.woodType} onChange={e => setFormData({ ...formData, woodType: e.target.value })} className="w-full bg-surface-container border border-gold/30 rounded p-3 text-sm focus:border-forest focus:outline-none transition-colors text-brown font-semibold">
                   <option>Teak Wood</option>
                   <option>Hardwood</option>
                   <option>Pine Wood</option>
@@ -301,27 +305,28 @@ function QuoteSection() {
                 </select>
               </div>
               <div>
-                <label className="block text-[10px] uppercase tracking-widest text-beige-dim mb-2 drop-shadow-md">Quantity</label>
-                <input required type="text" value={formData.quantity} onChange={e => setFormData({ ...formData, quantity: e.target.value })} className="w-full bg-black/50 border border-gold/20 rounded p-3 text-sm focus:border-gold focus:outline-none transition-colors text-white" placeholder="e.g., 50 CFT" />
+                <label className="block text-[10px] uppercase tracking-widest text-text-muted mb-2 font-bold">Quantity</label>
+                <input required type="text" value={formData.quantity} onChange={e => setFormData({ ...formData, quantity: e.target.value })} className="w-full bg-surface-container border border-gold/30 rounded p-3 text-sm focus:border-forest focus:outline-none transition-colors text-brown font-semibold" placeholder="e.g., 50 CFT" />
               </div>
               <div>
-                <label className="block text-[10px] uppercase tracking-widest text-beige-dim mb-2 drop-shadow-md">Thickness</label>
-                <input required type="text" value={formData.thickness} onChange={e => setFormData({ ...formData, thickness: e.target.value })} className="w-full bg-black/50 border border-gold/20 rounded p-3 text-sm focus:border-gold focus:outline-none transition-colors text-white" placeholder="e.g., 2 inch" />
+                <label className="block text-[10px] uppercase tracking-widest text-text-muted mb-2 font-bold">Thickness</label>
+                <input required type="text" value={formData.thickness} onChange={e => setFormData({ ...formData, thickness: e.target.value })} className="w-full bg-surface-container border border-gold/30 rounded p-3 text-sm focus:border-forest focus:outline-none transition-colors text-brown font-semibold" placeholder="e.g., 2 inch" />
               </div>
             </div>
 
             <div>
-              <label className="block text-[10px] uppercase tracking-widest text-beige-dim mb-2 drop-shadow-md">Project Details</label>
-              <textarea required rows={3} value={formData.details} onChange={e => setFormData({ ...formData, details: e.target.value })} className="w-full bg-black/50 border border-gold/20 rounded p-3 text-sm focus:border-gold focus:outline-none transition-colors resize-none text-white" placeholder="What are you building?"></textarea>
+              <label className="block text-[10px] uppercase tracking-widest text-text-muted mb-2 font-bold">Project Details</label>
+              <textarea required rows={3} value={formData.details} onChange={e => setFormData({ ...formData, details: e.target.value })} className="w-full bg-surface-container border border-gold/30 rounded p-3 text-sm focus:border-forest focus:outline-none transition-colors resize-none text-brown font-semibold" placeholder="What are you building?"></textarea>
             </div>
 
-            <button type="submit" className="w-full bg-gold text-black py-4 font-bold uppercase tracking-widest text-xs hover:bg-white hover:shadow-[0_0_20px_rgba(200,161,101,0.4)] transition-all flex justify-center items-center gap-2 mt-2 rounded-sm">
+            <button type="submit" className="w-full bg-forest text-white py-4 font-bold uppercase tracking-widest text-xs hover:bg-brown hover:shadow-xl transition-all flex justify-center items-center gap-2 mt-2 rounded-sm">
               <FileText size={16} /> Submit Request
             </button>
           </form>
         </motion.div>
       </div>
     </section>
+
   );
 }
 
@@ -336,19 +341,19 @@ const ShopPage = () => {
     });
   }, []);
 
-  if (loading) return <div className="pt-32 text-center text-white/50 min-h-screen">Loading inventory...</div>;
+  if (loading) return <div className="pt-32 text-center text-forest min-h-screen">Loading inventory...</div>;
 
   return (
     <div className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
       <SectionWrapper>
         <div className="mb-12">
-           <div className="text-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Live Inventory</div>
-           <h1 className="font-heading text-5xl text-white mb-4">The Collection</h1>
-           <p className="text-beige-dim max-w-2xl mb-12">Every piece is hand-selected and ethically sourced. Real-time pricing from our Industrial Timber District depot.</p>
+           <div className="text-forest text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Live Inventory</div>
+           <h1 className="font-heading text-5xl text-brown mb-4">The Collection</h1>
+           <p className="text-text-muted max-w-2xl mb-12">Every piece is hand-selected and ethically sourced. Real-time pricing from our Industrial Timber District depot.</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.length === 0 && <div className="text-white/30 uppercase tracking-widest text-xs">No products in showroom yet.</div>}
+          {products.length === 0 && <div className="text-text-muted uppercase tracking-widest text-xs">No products in showroom yet.</div>}
           {products.map((p, i) => (
             <motion.div
               key={p.id || i}
@@ -356,23 +361,23 @@ const ShopPage = () => {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="group bg-black/40 border border-white/10 overflow-hidden rounded-xl shadow-2xl transition-all hover:border-gold/30"
+              className="group bg-white border border-gold/20 overflow-hidden rounded-xl shadow-lg transition-all hover:border-forest/40 hover:shadow-2xl"
             >
               <div className="aspect-[4/5] overflow-hidden relative">
                 <img src={p.image || "https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?auto=format&fit=crop&q=80"} alt={p.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brown/60 via-transparent to-transparent opacity-40" />
               </div>
               <div className="p-6 flex flex-col h-full">
-                <div className="text-[10px] uppercase tracking-widest text-gold font-bold mb-1">{p.origin}</div>
-                <h3 className="font-heading text-xl text-white mb-2">{p.name}</h3>
-                <p className="text-xs text-beige-dim mb-6 line-clamp-2 leading-relaxed flex-grow">{p.desc}</p>
+                <div className="text-[10px] uppercase tracking-widest text-forest font-bold mb-1">{p.origin}</div>
+                <h3 className="font-heading text-xl text-brown mb-2">{p.name}</h3>
+                <p className="text-xs text-text-muted mb-6 line-clamp-2 leading-relaxed flex-grow">{p.desc}</p>
                 
-                <div className="flex items-center justify-between border-t border-white/10 pt-4 mt-auto">
+                <div className="flex items-center justify-between border-t border-gold/10 pt-4 mt-auto">
                   <div className="flex flex-col">
-                    <span className="text-[8px] uppercase tracking-[0.2em] text-white/40 font-bold">Starting from</span>
-                    <span className="text-lg font-heading text-gold">₹{p.price}<span className="text-[10px] font-sans text-white/50 ml-1">/sqft</span></span>
+                    <span className="text-[8px] uppercase tracking-[0.2em] text-text-muted font-bold">Starting from</span>
+                    <span className="text-lg font-heading text-forest font-bold">₹{p.price}<span className="text-[10px] font-sans text-text-muted ml-1 font-normal">/sqft</span></span>
                   </div>
-                  <a href="#quote" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white hover:text-gold transition-colors">
+                  <a href="#quote" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-brown hover:text-forest transition-colors">
                     Inquire Now <ArrowRight size={14} />
                   </a>
                 </div>
@@ -381,6 +386,7 @@ const ShopPage = () => {
           ))}
         </div>
       </SectionWrapper>
+
 
       <div id="quote" className="mt-12">
         <QuoteSection />
@@ -393,31 +399,31 @@ function AboutPage() {
   return (
     <div className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
       <div className="mb-16 text-center">
-        <div className="text-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Our Story</div>
-        <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-white mb-6 drop-shadow-2xl">About Timber Atelier</h1>
-        <p className="text-beige-dim max-w-3xl mx-auto text-sm leading-relaxed drop-shadow-md font-medium">
+        <div className="text-forest text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Our Story</div>
+        <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-brown mb-6">About Timber Atelier</h1>
+        <p className="text-text-muted max-w-3xl mx-auto text-sm leading-relaxed font-medium">
           Located in the heart of the Industrial Timber District, Timber Atelier is not just a supplier — we are curators of the world's finest wood. 
           With over two decades of experience, our massive depot houses exotic teaks, resilient hardwoods, and premium softwoods.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 items-center">
-        <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-gold/20 shadow-2xl">
-          <img src="/images/teak-texture.png" alt="Our Depot" className="w-full h-full object-cover filter grayscale-[10%]" />
+        <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-gold/30 shadow-2xl">
+          <img src="/images/teak-texture.png" alt="Our Depot" className="w-full h-full object-cover" />
         </div>
         <div>
-          <h2 className="font-heading text-3xl text-white mb-6">Master Craftsmanship</h2>
-          <p className="text-sm text-beige-dim leading-relaxed mb-6">
+          <h2 className="font-heading text-3xl text-brown mb-6">Master Craftsmanship</h2>
+          <p className="text-sm text-text-muted leading-relaxed mb-6">
             We operate state-of-the-art CNC mills right on our premises, allowing us to supply bespoke, precision-cut timber for luxury residential projects, grand commercial builds, and everything in between.
           </p>
           <div className="grid grid-cols-2 gap-6 mt-8">
-            <div className="border-l-2 border-gold pl-4">
-              <div className="text-3xl font-heading text-white">10K+</div>
-              <div className="text-[10px] text-beige-dim uppercase tracking-widest mt-1">CFT Stocked</div>
+            <div className="border-l-2 border-forest pl-4">
+              <div className="text-3xl font-heading text-brown">10K+</div>
+              <div className="text-[10px] text-text-muted uppercase tracking-widest mt-1 font-bold">CFT Stocked</div>
             </div>
-            <div className="border-l-2 border-gold pl-4">
-              <div className="text-3xl font-heading text-white">20+</div>
-              <div className="text-[10px] text-beige-dim uppercase tracking-widest mt-1">Years Expertise</div>
+            <div className="border-l-2 border-forest pl-4">
+              <div className="text-3xl font-heading text-brown">20+</div>
+              <div className="text-[10px] text-text-muted uppercase tracking-widest mt-1 font-bold">Years Expertise</div>
             </div>
           </div>
         </div>
@@ -427,6 +433,7 @@ function AboutPage() {
     </div>
   );
 }
+
 
 // --- MAIN LAYOUT & APP ---
 
@@ -516,28 +523,29 @@ function AppLayout() {
   };
 
   return (
-    <div className="min-h-screen font-sans selection:bg-gold selection:text-black flex flex-col text-white relative">
+    <div className="min-h-screen font-sans selection:bg-gold selection:text-white flex flex-col text-text-main relative">
       {/* BACKGROUND TEXTURE FOR THE REST OF THE PAGE */}
       <div 
-        className="fixed inset-0 z-[-1] bg-cover bg-center bg-no-repeat opacity-20 pointer-events-none"
+        className="fixed inset-0 z-[-1] bg-cover bg-center bg-no-repeat opacity-[0.03] pointer-events-none"
         style={{ backgroundImage: "url('/images/teak-texture.png')" }}
       />
-      <div className="fixed inset-0 z-[-2] bg-[#1a0f0a]" />
+      <div className="fixed inset-0 z-[-2] bg-surface" />
 
       {/* NAVBAR */}
-      <nav className="fixed top-0 w-full z-50 bg-[#080504]/90 backdrop-blur-xl border-b border-gold/10 shadow-2xl transition-transform">
+      <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-gold/20 shadow-lg transition-transform">
         <div className="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
-          <Link to="/" className="font-heading text-xl md:text-2xl tracking-[0.2em] font-bold text-gold drop-shadow-md">TIMBER ATELIER</Link>
-          <div className="hidden md:flex gap-8 font-semibold tracking-widest uppercase text-[10px]">
-            <Link to="/" className={`${location.pathname === '/' ? 'text-gold' : 'text-outline-dim hover:text-white'} transition-colors`}>Home</Link>
-            <Link to="/shop" className={`${location.pathname === '/shop' ? 'text-gold' : 'text-outline-dim hover:text-white'} transition-colors`}>Shop</Link>
-            <Link to="/about" className={`${location.pathname === '/about' ? 'text-gold' : 'text-outline-dim hover:text-white'} transition-colors`}>About</Link>
+          <Link to="/" className="font-heading text-xl md:text-2xl tracking-[0.2em] font-bold text-brown">TIMBER ATELIER</Link>
+          <div className="hidden md:flex gap-8 font-bold tracking-widest uppercase text-[10px]">
+            <Link to="/" className={`${location.pathname === '/' ? 'text-forest' : 'text-text-muted hover:text-brown'} transition-colors`}>Home</Link>
+            <Link to="/shop" className={`${location.pathname === '/shop' ? 'text-forest' : 'text-text-muted hover:text-brown'} transition-colors`}>Shop</Link>
+            <Link to="/about" className={`${location.pathname === '/about' ? 'text-forest' : 'text-text-muted hover:text-brown'} transition-colors`}>About</Link>
           </div>
-          <a href="#quote" className="border border-gold text-gold hover:bg-gold hover:text-black transition-colors px-6 py-2 text-[10px] uppercase tracking-widest font-bold shadow-lg shadow-gold/10">
+          <a href="#quote" className="bg-forest text-white hover:bg-brown transition-colors px-6 py-2 text-[10px] uppercase tracking-widest font-bold shadow-md">
             Request Quote
           </a>
         </div>
       </nav>
+
 
       {/* PAGE CONTENT */}
       <div className="flex-1 relative z-10">
@@ -550,14 +558,15 @@ function AppLayout() {
       </div>
 
       {/* FOOTER */}
-      <footer className="py-12 text-center bg-[#080504] border-t border-gold/10 relative z-10">
-        <div className="font-heading text-xl tracking-[0.2em] font-bold text-gold mb-6 drop-shadow-md">TIMBER ATELIER</div>
+      <footer className="py-12 text-center bg-surface-container border-t border-gold/20 relative z-10">
+        <div className="font-heading text-xl tracking-[0.2em] font-bold text-brown mb-6">TIMBER ATELIER</div>
         <div className="flex justify-center gap-6 mb-6">
-          <Link to="/shop" className="text-[10px] uppercase tracking-widest text-beige-dim hover:text-white">Shop</Link>
-          <a href="#quote" className="text-[10px] uppercase tracking-widest text-beige-dim hover:text-white">Contact</a>
+          <Link to="/shop" className="text-[10px] uppercase tracking-widest text-text-muted hover:text-brown font-bold">Shop</Link>
+          <a href="#quote" className="text-[10px] uppercase tracking-widest text-text-muted hover:text-brown font-bold">Contact</a>
         </div>
-        <p className="text-[10px] text-white/30 uppercase tracking-widest drop-shadow-md">© 2026. Premium Timber Showroom.</p>
+        <p className="text-[10px] text-text-muted/60 uppercase tracking-widest font-bold">© 2026. Premium Timber Showroom.</p>
       </footer>
+
 
       {/* AI CHATBOT WIDGET */}
       <AnimatePresence>
@@ -566,41 +575,41 @@ function AppLayout() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-24 right-6 w-80 md:w-96 h-[500px] bg-black/90 backdrop-blur-2xl rounded-xl flex flex-col overflow-hidden z-50 border border-gold/30 shadow-2xl"
+            className="fixed bottom-24 right-6 w-80 md:w-96 h-[500px] bg-white backdrop-blur-2xl rounded-xl flex flex-col overflow-hidden z-50 border border-forest/30 shadow-2xl"
           >
-            <div className="bg-[#1A110F] p-4 border-b border-gold/20 flex justify-between items-center">
+            <div className="bg-surface-container p-4 border-b border-forest/20 flex justify-between items-center">
               <div className="flex items-center gap-3">
-                <div className="bg-gold/10 p-2 rounded-full border border-gold/30 shadow-inner"><Bot className="text-gold w-5 h-5" /></div>
+                <div className="bg-forest/10 p-2 rounded-full border border-forest/30"><Bot className="text-forest w-5 h-5" /></div>
                 <div>
-                  <div className="font-bold text-sm text-white">Timber AI Voice Agent</div>
-                  <div className="text-[10px] text-green-400 uppercase tracking-widest font-bold drop-shadow">Online</div>
+                  <div className="font-bold text-sm text-brown">Timber AI Agent</div>
+                  <div className="text-[10px] text-forest uppercase tracking-widest font-bold">Online</div>
                 </div>
               </div>
-              <button onClick={() => setIsChatOpen(false)} className="text-beige-dim hover:text-white"><X size={20} /></button>
+              <button onClick={() => setIsChatOpen(false)} className="text-text-muted hover:text-brown"><X size={20} /></button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4">
+            <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 bg-surface/50">
               {messages.map((m, i) => (
-                <div key={i} className={`max-w-[85%] p-3 rounded-xl text-sm leading-relaxed shadow-md ${m.role === 'user' ? 'bg-gold/20 border border-gold/30 text-white self-end rounded-br-none' : 'bg-white/5 border border-white/10 self-start rounded-bl-none text-beige-dim'}`}>
+                <div key={i} className={`max-w-[85%] p-3 rounded-xl text-sm leading-relaxed shadow-sm ${m.role === 'user' ? 'bg-forest text-white self-end rounded-br-none' : 'bg-white border border-gold/30 self-start rounded-bl-none text-text-main font-medium'}`}>
                   {m.content}
                 </div>
               ))}
               {isTyping && (
-                <div className="bg-white/5 border border-white/10 self-start rounded-bl-none max-w-[85%] p-3 rounded-xl text-sm text-outline-dim italic">
+                <div className="bg-white border border-gold/30 self-start rounded-bl-none max-w-[85%] p-3 rounded-xl text-sm text-text-muted italic">
                   Typing...
                 </div>
               )}
               <div ref={chatEndRef} />
             </div>
 
-            <div className="p-3 bg-[#1A110F] border-t border-gold/20 flex gap-2">
+            <div className="p-3 bg-surface-container border-t border-forest/20 flex gap-2">
               <input
                 type="text" value={inputMsg} onChange={e => setInputMsg(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && handleSendChat()}
                 placeholder="Ask about wood or pricing..."
-                className="flex-1 bg-black/50 border border-gold/20 rounded px-3 py-2 text-sm focus:outline-none focus:border-gold text-white placeholder:text-white/30"
+                className="flex-1 bg-white border border-gold/30 rounded px-3 py-2 text-sm focus:outline-none focus:border-forest text-brown placeholder:text-text-muted/40 font-medium"
               />
-              <button onClick={handleSendChat} className="bg-gold text-black p-2 rounded hover:bg-white hover:shadow-[0_0_15px_rgba(200,161,101,0.5)] transition-all">
+              <button onClick={handleSendChat} className="bg-forest text-white p-2 rounded hover:bg-brown transition-all shadow-md">
                 <Send size={18} />
               </button>
             </div>
@@ -610,10 +619,11 @@ function AppLayout() {
 
       <button
         onClick={() => setIsChatOpen(!isChatOpen)}
-        className="fixed bottom-6 right-6 bg-gold text-black w-14 h-14 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(200,161,101,0.5)] hover:scale-105 transition-transform z-50 border border-white/20"
+        className="fixed bottom-6 right-6 bg-forest text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl hover:scale-105 transition-transform z-50 border border-white/20"
       >
         {isChatOpen ? <X size={24} /> : <Bot size={24} />}
       </button>
+
 
     </div>
   );

@@ -4,54 +4,54 @@
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-heading: 'Cinzel', serif;
 
-  --color-surface: #131313;
-  --color-surface-container: #201f1f;
-  --color-surface-high: #2a2a2a;
-  --color-gold: #C8A165;
-  --color-gold-dim: #b48f54;
-  --color-beige: #e5e2e1;
-  --color-beige-dim: #d3c3c0;
-  --color-brown: #3E2723;
-  --color-brown-dim: #1A110F;
-  --color-outline: #504442;
-  --color-outline-dim: #9c8d8b;
-  --color-tertiary: #eac081;
+  --color-surface: #F7F3EB;
+  --color-surface-container: #EFEBE3;
+  --color-surface-high: #E7E2D8;
+  --color-gold: #C8A45D;
+  --color-gold-dim: #A6874B;
+  --color-forest: #1F3D2B;
+  --color-forest-light: #2D5A40;
+  --color-brown: #5A3E2B;
+  --color-brown-light: #7D5A42;
+  --color-text-main: #1C1C1C;
+  --color-text-muted: #4A4A4A;
+  --color-outline: #D7B899;
+  --color-outline-dim: #E5D2C0;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #080504;
-    color: var(--color-beige);
+    background-color: var(--color-surface);
+    color: var(--color-text-main);
   }
   body {
-    background-color: #080504;
-    background-image: linear-gradient(rgba(8, 5, 4, 0.85), rgba(8, 5, 4, 0.95)), url('/images/teak-texture.png');
+    background-color: var(--color-surface);
+    background-image: 
+      linear-gradient(rgba(247, 243, 235, 0.9), rgba(247, 243, 235, 0.95)),
+      url('/images/teak-texture.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    background-blend-mode: multiply;
   }
   ::selection {
     background-color: var(--color-gold);
-    color: #000;
+    color: #fff;
   }
 }
 
 .glass-panel {
-  background: rgba(62, 39, 35, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(234, 192, 129, 0.2);
-  border-left: 1px solid rgba(234, 192, 129, 0.2);
-  border-right: 1px solid rgba(0, 0, 0, 0.5);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-  box-shadow: 0 10px 40px rgba(20, 10, 8, 0.5);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(200, 164, 93, 0.2);
+  box-shadow: 0 8px 32px rgba(90, 62, 43, 0.08);
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #eac081 0%, #C8A165 100%);
+  background: linear-gradient(135deg, #5A3E2B 0%, #1F3D2B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
