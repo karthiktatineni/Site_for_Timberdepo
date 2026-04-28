@@ -44,10 +44,10 @@ function HomePage() {
     <>
       {/* HERO SECTION */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden text-center bg-transparent">
-        <video 
-          autoPlay 
-          loop 
-          muted 
+        <video
+          autoPlay
+          loop
+          muted
           playsInline
           className="absolute inset-0 z-0 w-full h-full object-cover opacity-80"
           src="/images/Timber_journey_from_202604262201 (3).mp4"
@@ -107,7 +107,7 @@ function HomePage() {
             </div>
           </motion.div>
           <motion.div variants={fadeUp} className="relative aspect-video lg:aspect-square rounded-xl overflow-hidden border border-gold/30 shadow-2xl">
-            <img src="/images/hero-bg.png" alt="Our Depot" className="w-full h-full object-cover" />
+            <img src="/images/timberimg.jpeg" alt="Our Depot" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-forest/5" />
           </motion.div>
         </div>
@@ -174,11 +174,11 @@ function HomePage() {
             { title: "Structural Beams", img: "/images/construction-project.png" }
           ].map((item, idx) => (
             <motion.div key={idx} variants={fadeUp} className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer shadow-xl border border-gold/10 bg-surface-high">
-              <img 
-                src={item.img} 
-                alt={item.title} 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform" 
-                style={{ 
+              <img
+                src={item.img}
+                alt={item.title}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform"
+                style={{
                   imageRendering: 'auto',
                   backfaceVisibility: 'hidden',
                   transform: 'translateZ(0)'
@@ -356,11 +356,11 @@ const ShopPage = () => {
     <div className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
       <SectionWrapper>
         <div className="mb-12">
-           <div className="text-forest text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Live Inventory</div>
-           <h1 className="font-heading text-5xl text-brown mb-4">The Collection</h1>
-           <p className="text-text-muted max-w-2xl mb-12">Every piece is hand-selected and ethically sourced. Real-time pricing from our Industrial Timber District depot.</p>
+          <div className="text-forest text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Live Inventory</div>
+          <h1 className="font-heading text-5xl text-brown mb-4">The Collection</h1>
+          <p className="text-text-muted max-w-2xl mb-12">Every piece is hand-selected and ethically sourced. Real-time pricing from our Industrial Timber District depot.</p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.length === 0 && <div className="text-text-muted uppercase tracking-widest text-xs">No products in showroom yet.</div>}
           {products.map((p, i) => (
@@ -373,11 +373,11 @@ const ShopPage = () => {
               className="group bg-white border border-gold/20 overflow-hidden rounded-xl shadow-lg transition-all hover:border-forest/40 hover:shadow-2xl"
             >
               <div className="aspect-[4/5] overflow-hidden relative bg-surface-high">
-                <img 
-                  src={p.image || "https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?auto=format&fit=crop&q=80"} 
-                  alt={p.name} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform" 
-                  style={{ 
+                <img
+                  src={p.image || "https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?auto=format&fit=crop&q=80"}
+                  alt={p.name}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform"
+                  style={{
                     imageRendering: 'auto',
                     backfaceVisibility: 'hidden',
                     transform: 'translateZ(0)'
@@ -398,7 +398,7 @@ const ShopPage = () => {
                 </div>
                 <h3 className="font-heading text-xl text-brown mb-2">{p.name}</h3>
                 <p className="text-xs text-text-muted mb-4 line-clamp-2 leading-relaxed flex-grow">{p.desc}</p>
-                
+
                 <div className="flex items-center justify-between border-t border-gold/10 pt-4 mt-auto">
                   <div className="flex flex-col">
                     <span className="text-[8px] uppercase tracking-[0.2em] text-text-muted font-bold">Starting from</span>
@@ -432,7 +432,7 @@ function AboutPage() {
         <div className="text-forest text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Our Story</div>
         <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-brown mb-6">About Timber Atelier</h1>
         <p className="text-text-muted max-w-3xl mx-auto text-sm leading-relaxed font-medium">
-          Located in the heart of the Industrial Timber District, Timber Atelier is not just a supplier — we are curators of the world's finest wood. 
+          Located in the heart of the Industrial Timber District, Timber Atelier is not just a supplier — we are curators of the world's finest wood.
           With over two decades of experience, our massive depot houses exotic teaks, resilient hardwoods, and premium softwoods.
         </p>
       </div>
@@ -458,7 +458,7 @@ function AboutPage() {
           </div>
         </div>
       </div>
-      
+
       <QuoteSection />
     </div>
   );
@@ -517,10 +517,10 @@ function AppLayout() {
     setIsTyping(true);
 
     try {
-      const liveContext = liveInventory.length > 0 
-        ? `\nCURRENT INVENTORY & PRICING: ${JSON.stringify(liveInventory.map(p => ({name: p.name, price_per_sqft: p.price, stock: p.stock})))}`
+      const liveContext = liveInventory.length > 0
+        ? `\nCURRENT INVENTORY & PRICING: ${JSON.stringify(liveInventory.map(p => ({ name: p.name, price_per_sqft: p.price, stock: p.stock })))}`
         : '';
-        
+
       const apiMessages = [
         { role: 'system', content: SYSTEM_PROMPT + liveContext },
         ...messages.map(m => ({ role: m.role === 'bot' ? 'assistant' : 'user', content: m.content })),
@@ -555,7 +555,7 @@ function AppLayout() {
   return (
     <div className="min-h-screen font-sans selection:bg-gold selection:text-white flex flex-col text-text-main relative">
       {/* BACKGROUND TEXTURE FOR THE REST OF THE PAGE */}
-      <div 
+      <div
         className="fixed inset-0 z-[-1] bg-cover bg-center bg-no-repeat opacity-[0.03] pointer-events-none"
         style={{ backgroundImage: "url('/images/teak-texture.png')" }}
       />
