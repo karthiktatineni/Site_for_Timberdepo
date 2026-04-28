@@ -32,7 +32,7 @@ const SectionWrapper = ({ children, className = "", id }: { children: React.Reac
 
 
 const REVIEWS = [
-  { name: "Arjun Reddy", role: "Lead Architect", text: "Timber Atelier provided the most exquisite Burmese Teak for our luxury villa project. The CNC cuts were precise to the millimeter." },
+  { name: "Arjun Reddy", role: "Lead Architect", text: "Simhachalam Timber Depot provided the most exquisite Burmese Teak for our luxury villa project. The CNC cuts were precise to the millimeter." },
   { name: "Sophia M.", role: "Interior Designer", text: "Their rosewood selection is unmatched. Delivery was right on time and the quality exceeded all expectations. My go-to timber depot." },
   { name: "Raman Constructions", role: "Contractor", text: "Ordered 5,000 CFT of structural hardwood. They handled the bulk order effortlessly and pricing was very competitive." }
 ];
@@ -73,11 +73,11 @@ function HomePage() {
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center">
-            <a href="#quote" className="bg-forest text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-brown hover:scale-105 transition-all duration-300 shadow-xl shadow-forest/20">
+            <a href="#quote" className="bg-forest text-white px-12 py-5 text-sm font-bold uppercase tracking-widest hover:bg-brown hover:scale-105 transition-all duration-300 shadow-xl shadow-forest/20">
               Get Instant Quote
             </a>
-            <Link to="/shop" className="glass-panel px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-forest/5 hover:border-forest transition-all duration-300 flex items-center gap-2 text-forest">
-              <ShoppingBag size={16} /> Shop Products
+            <Link to="/shop" className="glass-panel px-12 py-5 text-sm font-bold uppercase tracking-widest hover:bg-forest/5 hover:border-forest transition-all duration-300 flex items-center gap-2 text-forest">
+              <ShoppingBag size={18} /> Shop Products
             </Link>
           </div>
         </motion.div>
@@ -90,7 +90,7 @@ function HomePage() {
             <div className="text-forest text-[10px] uppercase tracking-[0.3em] font-bold mb-3">About Our Depot</div>
             <h2 className="font-heading text-4xl text-brown mb-6">A Heritage of Woodcraft.</h2>
             <p className="text-text-muted text-sm leading-relaxed mb-6">
-              Located in the heart of the Industrial Timber District, Timber Atelier is not just a supplier — we are curators of the world's finest wood. With over two decades of experience, our massive depot houses exotic teaks, resilient hardwoods, and premium softwoods.
+              Located in the heart of the Industrial Timber District, Simhachalam Timber Depot is not just a supplier — we are curators of the world's finest wood. With over two decades of experience, our massive depot houses exotic teaks, resilient hardwoods, and premium softwoods.
             </p>
             <p className="text-text-muted text-sm leading-relaxed mb-8">
               We operate state-of-the-art CNC mills right on our premises, allowing us to supply bespoke, precision-cut timber for luxury residential projects, grand commercial builds, and everything in between.
@@ -251,7 +251,7 @@ function QuoteSection() {
               </div>
               <div>
                 <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold">Address</div>
-                <div className="text-brown text-sm pr-4 font-semibold">Plot 45, Industrial Timber District, Bangalore</div>
+                <div className="text-brown text-sm pr-4 font-semibold">H.NO 3-4-95-8/1/364, New Narasimha Nagar, Mallapur, Hyderabad, Telangana</div>
               </div>
             </div>
 
@@ -261,7 +261,7 @@ function QuoteSection() {
               </div>
               <div>
                 <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold">Direct Line</div>
-                <div className="text-brown text-sm font-semibold">+91 98765 43210</div>
+                <div className="text-brown text-sm font-semibold">+91 9063617454</div>
               </div>
             </div>
           </div>
@@ -353,8 +353,8 @@ const ShopPage = () => {
   if (loading) return <div className="pt-32 text-center text-forest min-h-screen">Loading inventory...</div>;
 
   return (
-    <div className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
-      <SectionWrapper>
+    <div className="pt-20 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
+      <SectionWrapper className="!pt-2">
         <div className="mb-12">
           <div className="text-forest text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Live Inventory</div>
           <h1 className="font-heading text-5xl text-brown mb-4">The Collection</h1>
@@ -396,17 +396,19 @@ const ShopPage = () => {
                     </div>
                   )}
                 </div>
-                <h3 className="font-heading text-xl text-brown mb-2">{p.name}</h3>
-                <p className="text-xs text-text-muted mb-4 line-clamp-2 leading-relaxed flex-grow">{p.desc}</p>
-
-                <div className="flex items-center justify-between border-t border-gold/10 pt-4 mt-auto">
-                  <div className="flex flex-col">
+                <div className="flex justify-between items-baseline mb-2">
+                  <h3 className="font-heading text-xl text-brown">{p.name}</h3>
+                  <div className="flex flex-col items-end">
                     <span className="text-[8px] uppercase tracking-[0.2em] text-text-muted font-bold">Starting from</span>
                     <span className="text-lg font-heading text-forest font-bold">
-                      {p.price ? `₹${p.price}` : 'Quote on request'}
+                      {p.price ? `₹${p.price}` : 'Quote'}
                       {p.price && <span className="text-[10px] font-sans text-text-muted ml-1 font-normal">/sqft</span>}
                     </span>
                   </div>
+                </div>
+                <p className="text-xs text-text-muted mb-4 line-clamp-2 leading-relaxed flex-grow">{p.desc}</p>
+
+                <div className="flex items-center justify-end border-t border-gold/10 pt-4 mt-auto">
                   <a href="#quote" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-brown hover:text-forest transition-colors">
                     Inquire Now <ArrowRight size={14} />
                   </a>
@@ -427,12 +429,12 @@ const ShopPage = () => {
 
 function AboutPage() {
   return (
-    <div className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
+    <div className="pt-20 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
       <div className="mb-16 text-center">
         <div className="text-forest text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Our Story</div>
-        <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-brown mb-6">About Timber Atelier</h1>
+        <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-brown mb-6">About Simhachalam Timber Depot</h1>
         <p className="text-text-muted max-w-3xl mx-auto text-sm leading-relaxed font-medium">
-          Located in the heart of the Industrial Timber District, Timber Atelier is not just a supplier — we are curators of the world's finest wood.
+          Located in the heart of the Industrial Timber District, Simhachalam Timber Depot is not just a supplier — we are curators of the world's finest wood.
           With over two decades of experience, our massive depot houses exotic teaks, resilient hardwoods, and premium softwoods.
         </p>
       </div>
@@ -467,7 +469,7 @@ function AboutPage() {
 
 // --- MAIN LAYOUT & APP ---
 
-const SYSTEM_PROMPT = `You are a concise, highly intelligent AI sales assistant and voice receptionist for a premium timber depot (Timber Atelier). Answer ANY question the user asks properly and accurately.
+const SYSTEM_PROMPT = `You are a concise, highly intelligent AI sales assistant and voice receptionist for a premium timber depot (Simhachalam Timber Depot). Answer ANY question the user asks properly and accurately.
 
 If the inquiry is about timber or our business, use this knowledge:
 - We stock: Teak wood (premium), Hardwood (construction), Pine wood (budget).
@@ -562,17 +564,33 @@ function AppLayout() {
       <div className="fixed inset-0 z-[-2] bg-surface" />
 
       {/* NAVBAR */}
-      <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-gold/20 shadow-lg transition-transform">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
-          <Link to="/" className="font-heading text-xl md:text-2xl tracking-[0.2em] font-bold text-brown">TIMBER ATELIER</Link>
-          <div className="hidden md:flex gap-8 font-bold tracking-widest uppercase text-[10px]">
-            <Link to="/" className={`${location.pathname === '/' ? 'text-forest' : 'text-text-muted hover:text-brown'} transition-colors`}>Home</Link>
-            <Link to="/shop" className={`${location.pathname === '/shop' ? 'text-forest' : 'text-text-muted hover:text-brown'} transition-colors`}>Shop</Link>
-            <Link to="/about" className={`${location.pathname === '/about' ? 'text-forest' : 'text-text-muted hover:text-brown'} transition-colors`}>About</Link>
+      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-gold/20 shadow-lg">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
+          <Link to="/" className="font-heading text-lg md:text-xl tracking-[0.15em] font-bold text-brown shrink-0">
+            SIMHACHALAM TIMBER DEPOT
+          </Link>
+          
+          <div className="hidden lg:flex flex-1 justify-center px-12">
+            <div className="flex gap-10 font-bold tracking-widest uppercase text-[9px]">
+              <Link to="/" className={`${location.pathname === '/' ? 'text-forest' : 'text-text-muted hover:text-brown'} transition-colors`}>Home</Link>
+              <Link to="/shop" className={`${location.pathname === '/shop' ? 'text-forest' : 'text-text-muted hover:text-brown'} transition-colors`}>Shop</Link>
+              <Link to="/about" className={`${location.pathname === '/about' ? 'text-forest' : 'text-text-muted hover:text-brown'} transition-colors`}>About</Link>
+            </div>
           </div>
-          <a href="#quote" className="bg-forest text-white hover:bg-brown transition-colors px-6 py-2 text-[10px] uppercase tracking-widest font-bold shadow-md">
-            Request Quote
-          </a>
+
+          <div className="hidden md:flex items-center gap-8 shrink-0">
+            <a href="tel:+919063617454" className="flex items-center gap-2 text-forest hover:text-brown transition-colors group">
+              <Phone size={14} className="group-hover:scale-110 transition-transform" />
+              <span className="text-[10px] font-bold tracking-[0.1em] whitespace-nowrap">+91 9063617454</span>
+            </a>
+            <a href="#quote" className="bg-forest text-white hover:bg-brown transition-all px-10 py-3.5 text-[10px] uppercase tracking-[0.2em] font-bold shadow-lg shadow-forest/10 hover:shadow-xl">
+              Request Quote
+            </a>
+          </div>
+
+          <div className="md:hidden ml-auto flex items-center gap-4">
+            <a href="tel:+919063617454" className="text-forest"><Phone size={20} /></a>
+          </div>
         </div>
       </nav>
 
@@ -589,7 +607,7 @@ function AppLayout() {
 
       {/* FOOTER */}
       <footer className="py-12 text-center bg-surface-container border-t border-gold/20 relative z-10">
-        <div className="font-heading text-xl tracking-[0.2em] font-bold text-brown mb-6">TIMBER ATELIER</div>
+        <div className="font-heading text-xl tracking-[0.2em] font-bold text-brown mb-6">SIMHACHALAM TIMBER DEPOT</div>
         <div className="flex justify-center gap-6 mb-6">
           <Link to="/shop" className="text-[10px] uppercase tracking-widest text-text-muted hover:text-brown font-bold">Shop</Link>
           <a href="#quote" className="text-[10px] uppercase tracking-widest text-text-muted hover:text-brown font-bold">Contact</a>
