@@ -409,9 +409,15 @@ const ShopPage = () => {
                 <p className="text-xs text-text-muted mb-4 line-clamp-2 leading-relaxed flex-grow">{p.desc}</p>
 
                 <div className="flex items-center justify-end border-t border-gold/10 pt-4 mt-auto">
-                  <a href="#quote" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-brown hover:text-forest transition-colors">
-                    Inquire Now <ArrowRight size={14} />
-                  </a>
+                  <button 
+                    onClick={() => {
+                      setIsChatOpen(true);
+                      setMessages([...messages, { role: 'user', content: `I'm interested in ${p.name}. Can you give me a quote?` }]);
+                    }}
+                    className="w-full bg-surface-container border border-gold/30 text-brown py-4 text-[11px] font-extrabold uppercase tracking-widest hover:bg-forest hover:text-white transition-all shadow-sm hover:shadow-lg flex items-center justify-center gap-2"
+                  >
+                    Get a Quote <ArrowRight size={14} />
+                  </button>
                 </div>
               </div>
             </motion.div>
