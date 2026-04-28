@@ -173,8 +173,17 @@ function HomePage() {
             { title: "Custom Furniture", img: "/images/furniture-project.png" },
             { title: "Structural Beams", img: "/images/construction-project.png" }
           ].map((item, idx) => (
-            <motion.div key={idx} variants={fadeUp} className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer shadow-xl border border-gold/10">
-              <img src={item.img} alt={item.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <motion.div key={idx} variants={fadeUp} className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer shadow-xl border border-gold/10 bg-surface-high">
+              <img 
+                src={item.img} 
+                alt={item.title} 
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform" 
+                style={{ 
+                  imageRendering: 'auto',
+                  backfaceVisibility: 'hidden',
+                  transform: 'translateZ(0)'
+                }}
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-brown/90 via-brown/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                 <h3 className="font-heading text-2xl text-surface">{item.title}</h3>
                 <p className="text-xs uppercase tracking-widest text-surface mt-2 flex items-center gap-1 group-hover:text-gold transition-colors font-bold">
@@ -363,19 +372,40 @@ const ShopPage = () => {
               viewport={{ once: true }}
               className="group bg-white border border-gold/20 overflow-hidden rounded-xl shadow-lg transition-all hover:border-forest/40 hover:shadow-2xl"
             >
-              <div className="aspect-[4/5] overflow-hidden relative">
-                <img src={p.image || "https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?auto=format&fit=crop&q=80"} alt={p.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div className="aspect-[4/5] overflow-hidden relative bg-surface-high">
+                <img 
+                  src={p.image || "https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?auto=format&fit=crop&q=80"} 
+                  alt={p.name} 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform" 
+                  style={{ 
+                    imageRendering: 'auto',
+                    backfaceVisibility: 'hidden',
+                    transform: 'translateZ(0)'
+                  }}
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-brown/60 via-transparent to-transparent opacity-40" />
               </div>
               <div className="p-6 flex flex-col h-full">
-                <div className="text-[10px] uppercase tracking-widest text-forest font-bold mb-1">{p.origin}</div>
+                <div className="flex justify-between items-start mb-1">
+                  <div className="text-[10px] uppercase tracking-widest text-forest font-bold flex items-center gap-1">
+                    <MapPin size={10} /> {p.origin || 'Unknown Origin'}
+                  </div>
+                  {p.stock && (
+                    <div className="text-[9px] uppercase tracking-widest text-brown bg-gold/10 px-2 py-1 rounded font-bold flex items-center gap-1">
+                      <Package size={10} /> {p.stock}
+                    </div>
+                  )}
+                </div>
                 <h3 className="font-heading text-xl text-brown mb-2">{p.name}</h3>
-                <p className="text-xs text-text-muted mb-6 line-clamp-2 leading-relaxed flex-grow">{p.desc}</p>
+                <p className="text-xs text-text-muted mb-4 line-clamp-2 leading-relaxed flex-grow">{p.desc}</p>
                 
                 <div className="flex items-center justify-between border-t border-gold/10 pt-4 mt-auto">
                   <div className="flex flex-col">
                     <span className="text-[8px] uppercase tracking-[0.2em] text-text-muted font-bold">Starting from</span>
-                    <span className="text-lg font-heading text-forest font-bold">₹{p.price}<span className="text-[10px] font-sans text-text-muted ml-1 font-normal">/sqft</span></span>
+                    <span className="text-lg font-heading text-forest font-bold">
+                      {p.price ? `₹${p.price}` : 'Quote on request'}
+                      {p.price && <span className="text-[10px] font-sans text-text-muted ml-1 font-normal">/sqft</span>}
+                    </span>
                   </div>
                   <a href="#quote" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-brown hover:text-forest transition-colors">
                     Inquire Now <ArrowRight size={14} />

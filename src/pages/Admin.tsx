@@ -77,7 +77,8 @@ export default function AdminPage() {
         
         const resData = await response.json();
         if (resData.success) {
-          imageUrl = resData.data.url;
+          // Use data.image.url for the original high-resolution image
+          imageUrl = resData.data.image?.url || resData.data.url;
         } else {
           throw new Error("ImgBB upload failed");
         }
