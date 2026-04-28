@@ -339,7 +339,11 @@ function QuoteSection() {
   );
 }
 
-const ShopPage = () => {
+const ShopPage = ({ setIsChatOpen, setMessages, messages }: { 
+  setIsChatOpen: (open: boolean) => void, 
+  setMessages: (msgs: any[]) => void,
+  messages: any[]
+}) => {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -605,7 +609,7 @@ function AppLayout() {
       <div className="flex-1 relative z-10">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/shop" element={<ShopPage setIsChatOpen={setIsChatOpen} setMessages={setMessages} messages={messages} />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/admin" element={<AdminPage />} />
         </Routes>
