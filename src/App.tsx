@@ -265,12 +265,16 @@ function QuoteSection() {
               </div>
             </div>
           </div>
-
           <div className="w-full aspect-[16/9] md:aspect-[21/9] rounded-xl overflow-hidden border border-gold/20 shadow-inner">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15552.7133210553!2d77.580643!3d12.9715987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-              width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Map">
-            </iframe>
+              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3806.255089584193!2d78.56611577516631!3d17.447500683449977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTfCsDI2JzUxLjAiTiA3OMKwMzQnMDcuMyJF!5e0!3m2!1sen!2sin!4v1777462598507!5m2!1sen!2sin"
+              className="w-full h-full"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Map"
+            />
           </div>
         </motion.div>
 
@@ -339,8 +343,8 @@ function QuoteSection() {
   );
 }
 
-const ShopPage = ({ setIsChatOpen, setMessages, messages }: { 
-  setIsChatOpen: (open: boolean) => void, 
+const ShopPage = ({ setIsChatOpen, setMessages, messages }: {
+  setIsChatOpen: (open: boolean) => void,
   setMessages: (msgs: any[]) => void,
   messages: any[]
 }) => {
@@ -413,7 +417,7 @@ const ShopPage = ({ setIsChatOpen, setMessages, messages }: {
                 <p className="text-xs text-text-muted mb-4 line-clamp-2 leading-relaxed flex-grow">{p.desc}</p>
 
                 <div className="flex items-center justify-end border-t border-gold/10 pt-4 mt-auto">
-                  <button 
+                  <button
                     onClick={() => {
                       setIsChatOpen(true);
                       setMessages([...messages, { role: 'user', content: `I'm interested in ${p.name}. Can you give me a quote?` }]);
@@ -579,7 +583,7 @@ function AppLayout() {
           <Link to="/" className="font-heading text-lg md:text-xl tracking-[0.15em] font-bold text-brown shrink-0">
             SIMHACHALAM TIMBER DEPOT
           </Link>
-          
+
           <div className="hidden lg:flex flex-1 justify-center px-12">
             <div className="flex gap-10 font-bold tracking-widest uppercase text-[9px]">
               <Link to="/" className={`${location.pathname === '/' ? 'text-forest' : 'text-text-muted hover:text-brown'} transition-colors`}>Home</Link>
